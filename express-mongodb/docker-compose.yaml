@@ -1,0 +1,20 @@
+# Multiple Containers
+# Automatic Network Creation
+# Volume Management
+
+version: "3"
+services:
+  node-backend:
+    build: .
+    ports:
+      - "8000:8000"
+  mongodb:
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-item-volume:/data/db
+
+volumes:
+  mongo-item-volume:
+    external: true
