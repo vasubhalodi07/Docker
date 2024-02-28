@@ -1,0 +1,25 @@
+version: "3"
+services:
+  node:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      REDIS_HOST: redis-stack
+      REDIS_PORT: 6379
+
+  redis-stack:
+    image: redis/redis-stack:latest
+    ports:
+      - "8001:8001"
+      - "6379:6379"
+    volumes:
+      - redis-volume:/data/db
+
+networks:
+  my-network:
+    external: true
+
+volumes:
+  redis-volume:
+    external: true
